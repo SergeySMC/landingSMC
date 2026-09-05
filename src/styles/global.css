@@ -90,6 +90,25 @@ select {
   color: inherit;
 }
 
+/* --- Skip link (a11y) --- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 999;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 0 0 6px 6px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  color: var(--on-accent);
+}
+
 /* --- Images --- */
 img {
   max-width: 100%;
