@@ -17,6 +17,121 @@ const tgLink = 'https://t.me/julia_mak';
   <p class="note">Знакомство — 20 минут, бесплатно и без обязательств</p>
 </section>
 
+<section class="hero-photo">
+  <div class="placeholder">
+    <span>фото: раскладка карт на столе, крупный план рук</span>
+  </div>
+</section>
+
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: clamp(40px, 7vw, 84px) clamp(20px, 5vw, 72px) clamp(32px, 4.5vw, 56px);
+    text-align: center;
+  }
+
+  .kicker {
+    margin: 0 0 26px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  h1 {
+    margin: 0;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(33px, 6vw, 60px);
+    line-height: 1.14;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+
+  .lead {
+    margin: 28px auto 0;
+    max-width: 600px;
+    font-size: clamp(16px, 2.1vw, 19px);
+    line-height: 1.65;
+    color: var(--ink2);
+    text-wrap: pretty;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .btn-primary {
+    padding: 15px 30px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-h);
+    color: var(--on-accent);
+  }
+
+  .btn-secondary {
+    padding: 15px 30px;
+    border-radius: 999px;
+    border: 1px solid var(--line2);
+    color: var(--ink);
+    font-size: 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+
+  .note {
+    margin: 22px 0 0;
+    font-size: 14px;
+    color: var(--faint);
+  }
+
+  .hero-photo {
+    padding: 0 clamp(20px, 5vw, 72px) clamp(40px, 6vw, 68px);
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .placeholder {
+    height: clamp(230px, 33vw, 400px);
+    background-color: var(--ph);
+    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 22px;
+  }
+
+  .placeholder span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 8px 14px;
+    text-align: center;
+  }
 </style>

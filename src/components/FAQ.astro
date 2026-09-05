@@ -21,5 +21,43 @@ const faq = [
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .faq {
+    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0 0 28px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.22;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    max-width: 780px;
+  }
+
+  .item {
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+
+  h3 {
+    margin: 0 0 9px;
+    font-size: 16.5px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .item p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
 </style>

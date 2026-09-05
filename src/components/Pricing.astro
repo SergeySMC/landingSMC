@@ -21,5 +21,58 @@ const prices = [
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .pricing {
+    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0 0 36px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.22;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(24px, 3vw, 40px);
+  }
+
+  .card {
+    border: 1px solid var(--line2);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: Lora, Georgia, serif;
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    color: var(--accent);
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .note {
+    margin: 26px 0 0;
+    font-size: 14.5px;
+    color: var(--faint);
+  }
 </style>

@@ -4,11 +4,59 @@ const tgLink = 'https://t.me/julia_mak';
 
 <section id="zapis" class="cta-section">
   <h2>Начнём со знакомства</h2>
-  <p>Напишите мне в Telegram — расскажете, что происходит, и мы решим, подходит ли вам такая работа. Двадцать минут, без оплаты и без обязательств продолжать.</p>
+  <p class="desc">Напишите мне в Telegram — расскажете, что происходит, и мы решим, подходит ли вам такая работа. Двадцать минут, без оплаты и без обязательств продолжать.</p>
   <a href={tgLink} class="btn-primary">Записаться на сеанс</a>
   <p class="note">Отвечаю в течение дня.</p>
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .cta-section {
+    padding: clamp(48px, 6.5vw, 78px) clamp(20px, 5vw, 72px);
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4.4vw, 46px);
+    line-height: 1.18;
+    text-wrap: pretty;
+  }
+
+  .desc {
+    margin: 0 auto 36px;
+    max-width: 520px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+
+  .btn-primary {
+    padding: 16px 34px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 16.5px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-h);
+    color: var(--on-accent);
+  }
+
+  .note {
+    margin: 24px 0 0;
+    font-size: 14.5px;
+    color: var(--faint);
+  }
 </style>

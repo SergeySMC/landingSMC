@@ -29,5 +29,84 @@ const credentials = [
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .about {
+    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(32px, 6vw, 84px);
+    align-items: start;
+  }
+
+  .placeholder {
+    height: clamp(300px, 40vw, 460px);
+    background-color: var(--ph);
+    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .placeholder span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 8px 14px;
+  }
+
+  .kicker {
+    margin: 0 0 18px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  h2 {
+    margin: 0 0 24px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.22;
+  }
+
+  .text-col p:not(.kicker) {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+
+  .text-col p:not(.kicker) + p:not(.kicker) {
+    margin-top: 22px;
+  }
+
+  .text-col p:not(.kicker):last-of-type {
+    margin-bottom: 30px;
+  }
+
+  .credentials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 24px;
+    border-top: 1px solid var(--line2);
+    padding-top: 24px;
+  }
+
+  .value {
+    font-family: Lora, Georgia, serif;
+    font-size: 27px;
+    line-height: 1.1;
+  }
+
+  .label {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--faint);
+  }
 </style>

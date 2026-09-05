@@ -27,5 +27,67 @@ const facts = [
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .method {
+    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+    gap: clamp(32px, 6vw, 84px);
+    align-items: start;
+  }
+
+  .kicker {
+    margin: 0 0 18px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  h2 {
+    margin: 0 0 24px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.22;
+  }
+
+  .text-col p:not(.kicker) {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+
+  .text-col p:not(.kicker) + p:not(.kicker) {
+    margin-top: 18px;
+  }
+
+  .facts-col {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .fact {
+    border-left: 1px solid var(--line2);
+    padding-left: 22px;
+  }
+
+  .fact h3 {
+    margin: 0 0 7px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .fact p {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
 </style>

@@ -8,24 +8,133 @@ const features = [
 ---
 
 <section class="platform">
-  <div class="grid">
-    <div class="text-col">
-      <p class="kicker">Формат</p>
-      <h2>Готовая платформа для совместных онлайн-сессий</h2>
-      <p>Встречаемся не в мессенджере, а в кабинете для совместной работы: видеозвонок и колода карт в одном окне. Вы вытягиваете карты сами, мы оба видим одну раскладку и обсуждаем её в реальном времени.</p>
-      <ul class="features">
-        {features.map((f) => (
-          <li><span class="dot"></span><span>{f}</span></li>
-        ))}
-      </ul>
-      <a href="https://soulmindcards.com" target="_blank" rel="noopener" class="btn-outline">Перейти на платформу</a>
-    </div>
-    <div class="placeholder">
-      <span>скриншот платформы: видеозвонок + раскладка карт</span>
+  <div class="inner">
+    <div class="grid">
+      <div class="text-col">
+        <p class="kicker">Формат</p>
+        <h2>Готовая платформа для совместных онлайн-сессий</h2>
+        <p class="desc">Встречаемся не в мессенджере, а в кабинете для совместной работы: видеозвонок и колода карт в одном окне. Вы вытягиваете карты сами, мы оба видим одну раскладку и обсуждаем её в реальном времени.</p>
+        <div class="features">
+          {features.map((f) => (
+            <div class="feature">
+              <span class="dot"></span>
+              <span>{f}</span>
+            </div>
+          ))}
+        </div>
+        <a href="https://soulmindcards.com" target="_blank" rel="noopener" class="btn-outline">Перейти на платформу</a>
+      </div>
+      <div class="placeholder">
+        <span>скриншот платформы: видеозвонок + раскладка карт</span>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* Стили будут заполнены в Фазе 4 */
+  .platform {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+  }
+
+  .inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+    gap: clamp(32px, 6vw, 84px);
+    align-items: center;
+  }
+
+  .kicker {
+    margin: 0 0 18px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  h2 {
+    margin: 0 0 22px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(25px, 3.4vw, 36px);
+    line-height: 1.24;
+  }
+
+  .desc {
+    margin: 0 0 28px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink2);
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .feature {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  .feature span:last-child {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink2);
+  }
+
+  .btn-outline {
+    margin-top: 28px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 15.5px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .btn-outline:hover {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .placeholder {
+    height: clamp(220px, 29vw, 330px);
+    background-color: var(--ph);
+    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .placeholder span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 8px 14px;
+    text-align: center;
+  }
 </style>
