@@ -3,7 +3,7 @@ const faq = [
   { q: 'Я никогда не была у психолога. Это нормально?', a: 'Да. Начнём со знакомства: расскажете своими словами, я задам уточняющие вопросы. Ничего готовить заранее не нужно.' },
   { q: 'Карты — это точно не гадание?', a: 'Нет. Карты не содержат предсказаний. Это набор изображений, который помогает вам говорить о себе.' },
   { q: 'Онлайн работает так же, как лично?', a: 'Для работы с МАК — да. На платформе мы видим одну раскладку, и вы вытягиваете карты сами.' },
-  { q: 'Что нужно для сессии?', a: 'Ноутбук или телефон, наушники и место, где вас час не потревожат. Ссылка приходит перед встречей.' },
+  { q: 'Что нужно для сессии?', a: 'Ноутбук или телефон, наушники и место, где вас час не потревожат.' },
   { q: 'Как оплатить и можно ли перенести?', a: 'Оплата после подтверждения времени. Перенести встречу можно не позднее чем за 12 часов.' },
 ];
 ---
@@ -11,11 +11,11 @@ const faq = [
 <section id="faq" class="faq">
   <h2>Частые вопросы</h2>
   <div class="list">
-    {faq.map((item) => (
-      <div class="item">
-        <h3>{item.q}</h3>
+    {faq.map((item, i) => (
+      <details class="item" open={i === 0}>
+        <summary>{item.q}</summary>
         <p>{item.a}</p>
-      </div>
+      </details>
     ))}
   </div>
 </section>
@@ -47,15 +47,38 @@ const faq = [
     padding: 18px 0;
   }
 
-  h3 {
-    margin: 0 0 9px;
+  summary {
+    margin: 0;
     font-size: 16.5px;
     font-weight: 500;
     line-height: 1.4;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .item[open] summary::after {
+    content: '−';
   }
 
   .item p {
-    margin: 0;
+    margin: 9px 0 0;
     font-size: 15.5px;
     line-height: 1.65;
     color: var(--muted);
