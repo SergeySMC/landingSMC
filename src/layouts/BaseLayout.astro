@@ -12,12 +12,13 @@ interface Props {
 const {
   title,
   description,
-  ogImage = '/og-cover.jpg',
+  ogImage = `${import.meta.env.BASE_URL}/og-cover.jpg`,
   ogType = 'website',
   canonicalUrl,
 } = Astro.props;
 
-const siteUrl = Astro.site?.origin ?? 'https://soulmindcards.com';
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site?.origin ?? 'https://soulmindcards.net';
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 ---
@@ -65,9 +66,9 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Иконки -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}/site.webmanifest`} />
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

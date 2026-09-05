@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://soulmindcards.com/sitemap-index.xml
+Sitemap: https://shirkosergey.github.io/landingSMC/sitemap-index.xml

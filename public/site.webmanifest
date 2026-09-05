@@ -2,12 +2,12 @@
   "name": "Soul Mind Cards — психолог с МАК-картами",
   "short_name": "Soul Mind Cards",
   "lang": "ru",
-  "start_url": "/",
+  "start_url": "/landingSMC/",
   "display": "standalone",
   "background_color": "#faf8f4",
   "theme_color": "#faf8f4",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    { "src": "/landingSMC/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/landingSMC/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ]
 }
