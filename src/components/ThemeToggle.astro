@@ -1,0 +1,64 @@
+---
+---
+
+<button type="button" class="theme-toggle" aria-label="Переключить тему" title="Переключить тему">
+  <span class="icon sun" aria-hidden="true">☀</span>
+  <span class="icon moon" aria-hidden="true">☾</span>
+  <span class="knob" aria-hidden="true"></span>
+</button>
+
+<style>
+  .theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 74px;
+    height: 40px;
+    padding: 0 11px;
+    background: transparent;
+    border: 1px solid var(--line2);
+    border-radius: 999px;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .icon {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .sun { color: var(--sun); }
+  .moon { color: var(--moon); }
+
+  .knob {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--knob);
+    transition: transform 0.22s ease;
+  }
+
+  :global([data-theme="dark"]) .knob {
+    transform: translateX(32px);
+  }
+</style>
+
+<script is:inline>
+  document.querySelector('.theme-toggle')?.addEventListener('click', function () {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>

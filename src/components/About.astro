@@ -1,0 +1,33 @@
+---
+const credentials = [
+  { value: '5+ лет', label: 'в практике' },
+  { value: 'МАК', label: 'проективные методики' },
+  { value: 'Онлайн', label: 'своя платформа для сессий' },
+];
+---
+
+<section id="about" class="about">
+  <div class="grid">
+    <div class="placeholder">
+      <span>портрет</span>
+    </div>
+    <div class="text-col">
+      <p class="kicker">Обо мне</p>
+      <h2>Юлия, психолог</h2>
+      <p>Дипломированный психолог со стажем 5+ лет. Основное направление — проективные методики и работа с метафорическими ассоциативными картами.</p>
+      <p>Работаю бережно и без оценок. Не даю готовых советов — помогаю вам самим услышать, что вы уже знаете о своей ситуации.</p>
+      <div class="credentials">
+        {credentials.map((c) => (
+          <div class="credential">
+            <div class="value">{c.value}</div>
+            <div class="label">{c.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Стили будут заполнены в Фазе 4 */
+</style>

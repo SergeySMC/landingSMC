@@ -1,17 +1,76 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Topics from '../components/Topics.astro';
+import Method from '../components/Method.astro';
+import Steps from '../components/Steps.astro';
+import Platform from '../components/Platform.astro';
+import About from '../components/About.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Психолог с МАК-картами онлайн — сессии на платформе Soul Mind Cards"
+  description="Онлайн-сессии психолога с метафорическими ассоциативными картами: видеозвонок и общая раскладка карт в одном окне. Знакомство 20 минут — бесплатно."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://soulmindcards.com/#service",
+          "name": "Soul Mind Cards — онлайн-сессии психолога с МАК-картами",
+          "description": "Онлайн-консультации психолога с использованием метафорических ассоциативных карт на собственной платформе с видеозвонком и общей раскладкой карт.",
+          "url": "https://soulmindcards.com/",
+          "areaServed": "Онлайн",
+          "availableLanguage": "ru",
+          "priceRange": "4000–18000 ₽",
+          "provider": { "@id": "https://soulmindcards.com/#person" },
+          "offers": [
+            { "@type": "Offer", "name": "Знакомство, 20 минут", "price": "0", "priceCurrency": "RUB" },
+            { "@type": "Offer", "name": "Разовая сессия, 60 минут", "price": "4000", "priceCurrency": "RUB" },
+            { "@type": "Offer", "name": "Курс из 5 сессий", "price": "18000", "priceCurrency": "RUB" }
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://soulmindcards.com/#person",
+          "name": "Юлия",
+          "jobTitle": "Психолог, МАК-практик",
+          "description": "Дипломированный психолог со стажем 5+ лет. Основное направление — проективные методики и работа с метафорическими ассоциативными картами.",
+          "knowsAbout": ["метафорические ассоциативные карты", "проективные методики", "онлайн-консультирование"]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://soulmindcards.com/#faq",
+          "mainEntity": [
+            { "@type": "Question", "name": "Я никогда не была у психолога. Это нормально?", "acceptedAnswer": { "@type": "Answer", "text": "Да. Начнём со знакомства: расскажете своими словами, я задам уточняющие вопросы. Ничего готовить заранее не нужно." } },
+            { "@type": "Question", "name": "Карты — это точно не гадание?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Карты не содержат предсказаний. Это набор изображений, который помогает вам говорить о себе." } },
+            { "@type": "Question", "name": "Онлайн работает так же, как лично?", "acceptedAnswer": { "@type": "Answer", "text": "Для работы с МАК — да. На платформе мы видим одну раскладку, и вы вытягиваете карты сами." } },
+            { "@type": "Question", "name": "Что нужно для сессии?", "acceptedAnswer": { "@type": "Answer", "text": "Ноутбук или телефон, наушники и место, где вас час не потревожат. Ссылка приходит перед встречей." } },
+            { "@type": "Question", "name": "Как оплатить и можно ли перенести?", "acceptedAnswer": { "@type": "Answer", "text": "Оплата после подтверждения времени. Перенести встречу можно не позднее чем за 12 часов." } }
+          ]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Header />
+  <main>
+    <Hero />
+    <Topics />
+    <Method />
+    <Steps />
+    <Platform />
+    <About />
+    <Pricing />
+    <FAQ />
+    <CTA />
+  </main>
+  <Footer />
+</BaseLayout>

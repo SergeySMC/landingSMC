@@ -1,0 +1,42 @@
+---
+const tgLink = 'https://t.me/julia_mak';
+---
+
+<footer class="footer">
+  <span>© Soul Mind Cards</span>
+  <div class="footer-links">
+    <a href={tgLink}>Telegram</a>
+    <a href="#zapros">Запросы</a>
+    <a href="#price">Стоимость</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+    padding: 32px clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--faint);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 22px;
+  }
+
+  .footer-links a {
+    color: var(--faint);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+</style>

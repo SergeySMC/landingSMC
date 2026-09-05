@@ -1,0 +1,62 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="header">
+  <div class="logo">
+    <span>Soul Mind Cards</span>
+  </div>
+  <div class="header-right">
+    <nav>
+      <a href="#zapros">Запросы</a>
+      <a href="#mak">О методе</a>
+      <a href="#sessia">Как проходит</a>
+      <a href="#about">Обо мне</a>
+      <a href="#price">Стоимость</a>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(20px, 5vw, 72px);
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .logo span {
+    font-family: Lora, Georgia, serif;
+    font-size: 21px;
+    letter-spacing: 0.01em;
+  }
+
+  .header-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(14px, 2.2vw, 28px);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(14px, 2.2vw, 28px);
+    font-size: 14.5px;
+    color: var(--ink2);
+  }
+
+  nav a {
+    color: var(--ink2);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--accent-h);
+  }
+</style>

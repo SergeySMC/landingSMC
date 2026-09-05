@@ -1,0 +1,83 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-cover.jpg',
+  ogType = 'website',
+  canonicalUrl,
+} = Astro.props;
+
+const siteUrl = Astro.site?.origin ?? 'https://soulmindcards.com';
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Блокирующий скрипт темы — до первой отрисовки -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefer = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || prefer);
+      })();
+    </script>
+
+    <!-- SEO: основное -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="психолог онлайн, МАК-карты, метафорические ассоциативные карты, консультация психолога, проективные методики, онлайн сессия с картами" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Soul Mind Cards" />
+    <meta name="theme-color" content="#faf8f4" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Soul Mind Cards" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Раскладка метафорических ассоциативных карт" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Иконки -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap"
+    />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
