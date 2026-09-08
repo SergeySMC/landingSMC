@@ -1,15 +1,42 @@
 ---
 const tgLink = 'https://t.me/julia_mak';
 const steps = [
-  { num: 'Шаг 1', title: 'Знакомство', text: '20 минут: вы рассказываете, что происходит, я объясняю, как работаю. Бесплатно.' },
-  { num: 'Шаг 2', title: 'Запрос', text: 'Формулируем, с чем работаем и к чему хотим прийти. Это уже часть терапии.' },
-  { num: 'Шаг 3', title: 'Работа с картами', text: 'Вы вытягиваете карты в общем окне платформы, описываете образы, я задаю вопросы.' },
-  { num: 'Шаг 4', title: 'Итог встречи', text: 'Собираем, что стало ясно, и договариваемся о небольшом шаге до следующей сессии.' },
+  { num: 'Шаг 1', title: 'Приветствие', text: 'Создаем комфортную атмосферу и настраиваемся на работу.' },
+  { num: 'Шаг 2', title: 'Формирование запроса', text: 'Разбираем то, что вас волнует, и переводим это в четкую рабочую тему.' },
+  { num: 'Шаг 3', title: 'Работа с картами', text: 'Я подбираю МАК-технику под вашу задачу и последовательно прорабатываем запрос.' },
+  { num: 'Шаг 4', title: 'Итоги и действия', text: 'Подводим итоги, фиксируем инсайты и определяем ваши первые реальные шаги — составляем список применимых в жизни решений.' },
 ];
 ---
 
 <section id="sessia" class="steps">
-  <h2>Как проходит сессия</h2>
+  <h2>Как проходит работа</h2>
+
+  <div class="intro-block">
+    <h3 class="intro-title">Ознакомительный этап:</h3>
+    <p class="intro-subtitle">Ознакомительная сессия (20–30 минут, бесплатно)</p>
+    <div class="intro-items">
+      <div class="intro-item">
+        <div>
+          <strong>Знакомство.</strong> Небольшая встреча-знакомство: я расскажу о методе МАК и покажу, как устроен сам процесс.
+        </div>
+      </div>
+      <div class="intro-item">
+        <div>
+          <strong>Разбор ситуации:</strong> Мы обсуждаем вашу ситуацию, разбираем, с чем вы обратились, и подбираем направление для дальнейшей работы.
+        </div>
+      </div>
+      <div class="intro-item">
+        <div>
+          <strong>Ответы на вопросы:</strong> Вы сможете задать любые вопросы о процессе. Если у вас есть сомнения или неясности по поводу работы с МАК-картами, я подробно объясню весь механизм.
+        </div>
+      </div>
+    </div>
+    <p class="intro-goal"><strong>Цель встречи:</strong> Уточнить все нюансы работы и согласовать график дальнейших консультаций.</p>
+    <div class="intro-cta">
+      <a href={tgLink} class="btn-primary">Записаться на ознакомительную сессию</a>
+    </div>
+  </div>
+
   <div class="grid">
     {steps.map((s) => (
       <div class="step">
@@ -19,7 +46,6 @@ const steps = [
       </div>
     ))}
   </div>
-  <a href={tgLink} class="btn-primary">Записаться на сеанс</a>
 </section>
 
 <style>
@@ -38,6 +64,62 @@ const steps = [
     line-height: 1.22;
   }
 
+  /* Ознакомительный этап */
+  .intro-block {
+    margin-bottom: 48px;
+    padding: 32px 28px;
+    border: 1px solid var(--line2);
+    border-radius: 8px;
+  }
+
+  .intro-title {
+    margin: 0 0 8px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .intro-subtitle {
+    margin: 0 0 24px;
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .intro-items {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .intro-item {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+
+  .intro-icon {
+    flex: 0 0 auto;
+    font-size: 18px;
+  }
+
+  .intro-cta {
+    text-align: center;
+  }
+
+  .intro-goal {
+    margin: 0 0 6px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+
+  /* Шаги */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
