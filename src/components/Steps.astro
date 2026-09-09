@@ -11,32 +11,6 @@ const steps = [
 <section id="sessia" class="steps">
   <h2>Как проходит работа</h2>
 
-  <div class="intro-block">
-    <h3 class="intro-title">Ознакомительный этап:</h3>
-    <p class="intro-subtitle">Ознакомительная сессия (20–30 минут, бесплатно)</p>
-    <div class="intro-items">
-      <div class="intro-item">
-        <div>
-          <strong>Знакомство.</strong> Небольшая встреча-знакомство: я расскажу о методе МАК и покажу, как устроен сам процесс.
-        </div>
-      </div>
-      <div class="intro-item">
-        <div>
-          <strong>Разбор ситуации:</strong> Мы обсуждаем вашу ситуацию, разбираем, с чем вы обратились, и подбираем направление для дальнейшей работы.
-        </div>
-      </div>
-      <div class="intro-item">
-        <div>
-          <strong>Ответы на вопросы:</strong> Вы сможете задать любые вопросы о процессе. Если у вас есть сомнения или неясности по поводу работы с МАК-картами, я подробно объясню весь механизм.
-        </div>
-      </div>
-    </div>
-    <p class="intro-goal"><strong>Цель встречи:</strong> Уточнить все нюансы работы и согласовать график дальнейших консультаций.</p>
-    <div class="intro-cta">
-      <a href={tgLink} class="btn-primary">Записаться на ознакомительную сессию</a>
-    </div>
-  </div>
-
   <div class="grid">
     {steps.map((s) => (
       <div class="step">
@@ -46,11 +20,36 @@ const steps = [
       </div>
     ))}
   </div>
+
+  <div class="intro-block">
+    <h3 class="intro-title">Не уверены, с чего начать или подходит ли вам МАК?</h3>
+    <p class="intro-subtitle">Запишитесь на бесплатную ознакомительную консультацию (20–30 минут)</p>
+    <div class="intro-items">
+      <div class="intro-item">
+        <div>
+          <strong>Знакомство с методом:</strong> Расскажу и покажу, как работают МАК-карты и как проходит консультация.
+        </div>
+      </div>
+      <div class="intro-item">
+        <div>
+          <strong>Разбор запроса:</strong> Выделим суть вашей ситуации и определим направление для дальнейшей работы.
+        </div>
+      </div>
+      <div class="intro-item">
+        <div>
+          <strong>Ответы на вопросы:</strong> Вы сможете задать любые вопросы о процессе. Если у вас есть сомнения или неясности по поводу работы с МАК-картами, я подробно объясню весь механизм.
+        </div>
+      </div>
+    </div>
+    <div class="intro-cta">
+      <a href={tgLink} class="btn-primary">Записаться на ознакомительную сессию</a>
+    </div>
+  </div>
 </section>
 
 <style>
   .steps {
-    padding: clamp(40px, 5.5vw, 66px) clamp(20px, 5vw, 72px);
+    padding: clamp(30px, 4.1vw, 50px) clamp(20px, 5vw, 72px);
     max-width: 1120px;
     margin: 0 auto;
     border-top: 1px solid var(--line);
@@ -91,7 +90,7 @@ const steps = [
     display: flex;
     flex-direction: column;
     gap: 18px;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
   }
 
   .intro-item {
@@ -101,6 +100,10 @@ const steps = [
     font-size: 15.5px;
     line-height: 1.6;
     color: var(--ink2);
+  }
+
+  .intro-item strong {
+    font-weight: 500;
   }
 
   .intro-icon {

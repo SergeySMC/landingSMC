@@ -3,49 +3,73 @@ const tgLink = 'https://t.me/soulmindcards';
 ---
 
 <section id="zapis" class="cta-section">
-  <h2>Сделайте первый шаг к пониманию своего запроса</h2>
-  <p class="subtitle">Начните работу в комфортном для вас темпе</p>
-  <p class="desc">Переходите в Telegram-канал, проходите бесплатный тест с картами в закрепе или записывайтесь на 20-минутный ознакомительный созвон.</p>
+  <h2>Приглашаю в своё Telegram-пространство</h2>
+  <p class="lead">В Telegram-канале я показываю, как работают МАК-карты на реальных примерах, делюсь техниками работы и отвечаю на вопросы.</p>
+  <ul class="cta-list">
+    <li>Пройдите бесплатный тест в закрепе канала</li>
+    <li>Задайте вопрос лично или в комментариях</li>
+    <li>Запишитесь на 20-минутную встречу, когда почувствуете готовность</li>
+  </ul>
   <a href={tgLink} class="btn-primary">Перейти в Telegram-канал</a>
   <p class="note">Отвечаю лично в течение дня.</p>
 </section>
 
 <style>
   .cta-section {
-    padding: clamp(48px, 6.5vw, 78px) clamp(20px, 5vw, 72px);
-    max-width: 760px;
+    max-width: 860px;
     margin: 0 auto;
+    padding: clamp(30px, 5.25vw, 63px) clamp(20px, 5vw, 72px) clamp(24px, 3.4vw, 42px);
     text-align: center;
     border-top: 1px solid var(--line);
   }
 
   h2 {
-    margin: 0 0 20px;
+    margin: 0;
     font-family: Lora, Georgia, serif;
     font-weight: 400;
-    font-size: clamp(28px, 4.4vw, 46px);
-    line-height: 1.18;
+    font-size: clamp(33px, 6vw, 60px);
+    line-height: 1.14;
+    letter-spacing: -0.015em;
     text-wrap: pretty;
   }
 
-  .desc {
-    margin: 0 auto 36px;
-    max-width: 520px;
-    font-size: 17px;
-    line-height: 1.7;
+  .lead {
+    margin: 28px auto 0;
+    max-width: 600px;
+    font-size: clamp(16px, 2.1vw, 19px);
+    line-height: 1.65;
+    color: var(--ink2);
+    text-wrap: pretty;
+  }
+
+  .cta-list {
+    list-style: none;
+    margin: 20px auto 32px;
+    max-width: 600px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: clamp(16px, 2.1vw, 19px);
+    line-height: 1.65;
     color: var(--ink2);
   }
 
+  .cta-list li::before {
+    content: '✦  ';
+    color: var(--accent);
+  }
+
   .btn-primary {
-    padding: 16px 34px;
+    padding: 15px 30px;
     border-radius: 999px;
     background: var(--accent);
     color: var(--on-accent);
-    font-size: 16.5px;
+    font-size: 16px;
+    font-weight: 400;
     min-height: 44px;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     text-decoration: none;
     transition: background 0.15s;
   }
@@ -56,8 +80,8 @@ const tgLink = 'https://t.me/soulmindcards';
   }
 
   .note {
-    margin: 24px 0 0;
-    font-size: 14.5px;
+    margin: 22px 0 0;
+    font-size: 14px;
     color: var(--faint);
   }
 </style>
