@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 const credentials = [
   { value: '5+ лет', label: 'практики' },
   { value: 'МАК', label: 'Подтвержденная квалификация' },
@@ -8,9 +9,7 @@ const credentials = [
 
 <section id="about" class="about">
   <div class="grid">
-    <div class="placeholder">
-      <span>портрет</span>
-    </div>
+    <img class="portrait" src={`${base}about-photo.jpg`} alt="Ширко Юлия, психолог" width="560" height="460" loading="lazy" />
     <div class="text-col">
       <p class="kicker">Обо мне</p>
       <h2>Ширко Юлия, дипломированный психолог</h2>
@@ -42,22 +41,10 @@ const credentials = [
     align-items: start;
   }
 
-  .placeholder {
-    height: clamp(300px, 40vw, 460px);
-    background-color: var(--ph);
-    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .placeholder span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--bg);
-    padding: 8px 14px;
+  .portrait {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .kicker {

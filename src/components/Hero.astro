@@ -1,25 +1,24 @@
 ---
 const tgLink = 'https://t.me/soulmindcards';
+const tgDm = 'https://t.me/Soul_mind_cards';
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="hero">
   <p class="kicker">Онлайн-сессии с метафорическими ассоциативными картами</p>
-  <h1>Ясность в сложной ситуации за одну сессию с помощью МАК</h1>
+  <h1>Разобраться в сложной ситуации с помощью МАК</h1>
   <p class="lead">
-    Помогаю найти скрытые причины проблем в отношениях, самооценке, выборе решений и психосоматике — без долгих месяцев терапии.
+    Онлайн-сессии с психологом, где МАК-карты помогают по-новому посмотреть на отношения, выбор, самооценку и телесные реакции.
   </p>
   <div class="cta-group">
-    <a href={tgLink} class="btn-primary">Записаться на прием</a>
-    <a href="#mak" class="btn-secondary">Как работают карты</a>
-    <a href={tgLink} class="btn-secondary">Пройти бесплатный МАК-тест в Telegram</a>
+    <a href={tgDm} class="btn-primary">Записаться на прием</a>
+<a href={tgLink} class="btn-secondary">Пройти бесплатную практику с МАК →</a>
   </div>
   <p class="note">Первичная консультация-знакомство — 20 минут, бесплатно</p>
 </section>
 
 <section class="hero-photo">
-  <div class="placeholder">
-    <span>фото: раскладка карт на столе, крупный план рук</span>
-  </div>
+  <img src={`${base}hero-photo.jpg`} alt="Раскладка МАК-карт на столе, крупный план рук" width="1120" height="400" loading="eager" />
 </section>
 
 <style>
@@ -114,23 +113,10 @@ const tgLink = 'https://t.me/soulmindcards';
     margin: 0 auto;
   }
 
-  .placeholder {
-    height: clamp(230px, 33vw, 400px);
-    background-color: var(--ph);
-    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 22px;
-  }
-
-  .placeholder span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    background: var(--bg);
-    padding: 8px 14px;
-    text-align: center;
+  .hero-photo img {
+    width: 75%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 </style>

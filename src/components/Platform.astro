@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 const featuresTitle = 'Преимущества:';
 const features = [
   'Работает прямо в браузере, с компьютера и смартфона — никаких сторонних подключений и программ',
@@ -25,9 +26,7 @@ const features = [
         </div>
       </div>
       <div class="visual-col">
-        <div class="placeholder">
-          <span>скриншот платформы: видеозвонок + раскладка карт</span>
-        </div>
+        <img class="screenshot" src={`${base}platform-screenshot.png`} alt="Скриншот платформы: видеозвонок и раскладка МАК-карт" loading="lazy" />
         <a href="https://soulmindcards.com/" target="_blank" rel="noopener" class="btn-outline">Перейти на платформу</a>
       </div>
     </div>
@@ -129,23 +128,10 @@ const features = [
     color: var(--on-accent);
   }
 
-  .placeholder {
-    height: clamp(220px, 29vw, 330px);
-    background-color: var(--ph);
-    background-image: repeating-linear-gradient(135deg, var(--ph-line) 0 1px, transparent 1px 11px);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .placeholder span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--surface);
-    padding: 8px 14px;
-    text-align: center;
+  .screenshot {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .visual-col {
