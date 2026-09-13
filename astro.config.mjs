@@ -7,8 +7,8 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 export default defineConfig({
-  site: 'https://shirkosergey.github.io',
-  base: '/landingSMC',
+  site: 'https://soulmindcards.me',
+  base: '/',
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
