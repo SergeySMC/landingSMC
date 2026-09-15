@@ -1,13 +1,30 @@
 {
   "name": "Soul Mind Cards — психолог с МАК-картами",
   "short_name": "Soul Mind Cards",
-  "lang": "ru",
-  "start_url": "/landingSMC/",
+  "description": "Онлайн-сессии психолога с метафорическими ассоциативными картами.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#faf8f4",
-  "theme_color": "#faf8f4",
+  "lang": "ru",
+  "dir": "ltr",
+  "background_color": "#fcfaf6",
+  "theme_color": "#fcfaf6",
   "icons": [
-    { "src": "/landingSMC/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "/landingSMC/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
