@@ -26,7 +26,16 @@ const features = [
         </div>
       </div>
       <div class="visual-col">
-        <img class="screenshot" src={`${base}platform-screenshot.webp`} alt="Скриншот платформы: видеозвонок и раскладка МАК-карт" loading="lazy" />
+        <img
+          class="screenshot"
+          src={`${base}platform-screenshot-520.webp`}
+          srcset={`${base}platform-screenshot-520.webp 520w, ${base}platform-screenshot-1040.webp 1040w`}
+          sizes="(min-width: 1120px) 520px, (min-width: 700px) 45vw, 100vw"
+          alt="Скриншот платформы: видеозвонок и раскладка МАК-карт"
+          width="520"
+          height="249"
+          loading="lazy"
+        />
         <a href="https://soulmindcards.com/" target="_blank" rel="noopener" class="btn-outline">Перейти на платформу</a>
       </div>
     </div>

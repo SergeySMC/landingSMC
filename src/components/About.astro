@@ -9,7 +9,16 @@ const credentials = [
 
 <section id="about" class="about">
   <div class="grid">
-    <img class="portrait" src={`${base}about-photo.webp`} alt="Ширко Юлия, психолог" width="560" height="460" loading="lazy" />
+    <img
+      class="portrait"
+      src={`${base}about-photo-520.webp`}
+      srcset={`${base}about-photo-520.webp 520w, ${base}about-photo-1040.webp 1040w`}
+      sizes="(min-width: 1120px) 520px, (min-width: 700px) 45vw, 100vw"
+      alt="Ширко Юлия, психолог"
+      width="520"
+      height="693"
+      loading="lazy"
+    />
     <div class="text-col">
       <p class="kicker">Обо мне</p>
       <h2>Ширко Юлия, дипломированный психолог</h2>

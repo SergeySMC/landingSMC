@@ -18,7 +18,16 @@ const base = import.meta.env.BASE_URL;
 </section>
 
 <section class="hero-photo">
-  <img src={`${base}hero-photo.webp`} alt="Раскладка МАК-карт на столе, крупный план рук" width="1120" height="400" loading="eager" />
+  <img
+    src={`${base}hero-photo-735.webp`}
+    srcset={`${base}hero-photo-735.webp 735w, ${base}hero-photo-1470.webp 1470w`}
+    sizes="(min-width: 1120px) 732px, 75vw"
+    alt="Раскладка МАК-карт на столе, крупный план рук"
+    width="735"
+    height="551"
+    loading="eager"
+    fetchpriority="high"
+  />
 </section>
 
 <style>

@@ -9,6 +9,9 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 export default defineConfig({
   site: 'https://soulmindcards.me',
   base: '/',
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({

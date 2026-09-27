@@ -18,6 +18,14 @@ import Footer from '../components/Footer.astro';
   description="Онлайн-сессии психолога с метафорическими ассоциативными картами: видеозвонок и общая раскладка карт в одном окне. Знакомство 20 минут — бесплатно."
 >
   <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-photo-735.webp"
+      imagesrcset="/hero-photo-735.webp 735w, /hero-photo-1470.webp 1470w"
+      imagesizes="(min-width: 1120px) 732px, 75vw"
+      fetchpriority="high"
+    />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
