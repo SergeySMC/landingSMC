@@ -1,0 +1,271 @@
+---
+import { QUIZ_STEPS, QUIZ_SUB, QUIZ_BOOK_URL } from '../data/quiz';
+const total = QUIZ_STEPS.length;
+---
+
+<dialog id="quiz" class="quiz" aria-labelledby="quiz-title">
+  <div class="quiz-head">
+    <p class="quiz-kicker" id="quiz-title">Практика с МАК</p>
+    <span class="quiz-count" aria-live="polite" data-quiz-count>1 / {total}</span>
+    <button type="button" class="quiz-close" aria-label="Закрыть" data-quiz-close>×</button>
+  </div>
+  <div class="quiz-progress" aria-hidden="true"><span data-quiz-bar></span></div>
+
+  <form class="quiz-body" novalidate>
+    {QUIZ_STEPS.map((step, s) => (
+      <section class="quiz-step" data-step={s + 1} hidden={s > 0}>
+        {step.intro && (
+          <div class="quiz-intro">{step.intro.map((p) => <p>{p}</p>)}</div>
+        )}
+        {step.card && (
+          <figure class="quiz-card quiz-card--photo">
+            <img src={step.card.src} width={step.card.width} height={step.card.height} alt={step.card.alt} loading="lazy" decoding="async" />
+          </figure>
+        )}
+        {step.picks && (
+          <Fragment>
+            <p class="quiz-hint quiz-hint--center">Нажмите на карту, чтобы рассмотреть её подробнее.</p>
+            <div class="quiz-picks">
+              {step.picks.map((card, k) => (
+                <span class={`quiz-pick quiz-pick--${k + 1}`}>
+                  <button type="button" class="quiz-pick-img" data-quiz-zoom aria-label={`Открыть «Карта ${k + 1}» во весь экран`}>
+                    <img src={card.src} width={card.width} height={card.height} alt={card.alt} loading="lazy" decoding="async" />
+                    <span class="quiz-pick-zoom" aria-hidden="true"></span>
+                  </button>
+                  <span class="quiz-pick-cap">Карта {k + 1}</span>
+                </span>
+              ))}
+            </div>
+          </Fragment>
+        )}
+        <fieldset>
+          <legend class="quiz-q" tabindex="-1">{step.question}</legend>
+          <p class="quiz-sub">{QUIZ_SUB}</p>
+          <div class="quiz-opts">
+            {step.options.map((opt, k) => (
+              <label class="quiz-opt">
+                <input type="radio" name={`q${s + 1}`} value={k + 1} />
+                {opt.icon && <span class="quiz-opt-ico" aria-hidden="true">{opt.icon}</span>}
+                <span class="quiz-opt-text">
+                  {opt.tag && <span class="quiz-opt-tag">{opt.tag}</span>}
+                  <b>{opt.title}</b>
+                  <small>{opt.note}</small>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </section>
+    ))}
+
+    <section class="quiz-final" data-quiz-final hidden>
+      <h2 class="quiz-q" tabindex="-1">Ваш персональный вывод</h2>
+      <div class="quiz-result">
+        <p class="quiz-result-text" data-quiz-text></p>
+        <p class="quiz-result-cta" data-quiz-cta></p>
+      </div>
+    </section>
+  </form>
+
+  <div class="quiz-foot">
+    <button type="button" class="quiz-back" data-quiz-back hidden>← Назад</button>
+    <div class="quiz-actions">
+      <button type="button" class="quiz-next" data-quiz-next disabled>Далее</button>
+      <button type="button" class="quiz-next" data-quiz-finish hidden disabled>Посмотреть итог</button>
+      <a class="quiz-book" href={QUIZ_BOOK_URL} target="_blank" rel="noopener" data-quiz-book hidden>Записаться на сеанс</a>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="quiz-zoom" data-quiz-zoombox aria-label="Просмотр карты">
+  <button type="button" class="quiz-zoom-close" aria-label="Закрыть просмотр">×</button>
+  <figure>
+    <img alt="" data-quiz-zoomimg />
+    <figcaption data-quiz-zoomcap></figcaption>
+  </figure>
+</dialog>
+
+<script>
+  import { QUIZ_RESULTS } from '../data/quiz';
+
+  const dlg = document.getElementById('quiz') as HTMLDialogElement | null;
+  const openers = document.querySelectorAll<HTMLAnchorElement>('[data-quiz-open]');
+
+  // Без поддержки <dialog> кнопка остаётся обычной ссылкой на Telegram
+  if (dlg && typeof dlg.showModal === 'function' && openers.length) {
+    const $ = <T extends Element>(sel: string) => dlg.querySelector(sel) as T;
+    const form = $<HTMLFormElement>('form');
+    const steps = dlg.querySelectorAll<HTMLElement>('.quiz-step');
+    const total = steps.length; // индекс total — экран итога
+    const count = $<HTMLElement>('[data-quiz-count]');
+    const bar = $<HTMLElement>('[data-quiz-bar]');
+    const back = $<HTMLButtonElement>('[data-quiz-back]');
+    const next = $<HTMLButtonElement>('[data-quiz-next]');
+    const finish = $<HTMLButtonElement>('[data-quiz-finish]');
+    const book = $<HTMLAnchorElement>('[data-quiz-book]');
+    const final = $<HTMLElement>('[data-quiz-final]');
+    const text = $<HTMLElement>('[data-quiz-text]');
+    const cta = $<HTMLElement>('[data-quiz-cta]');
+    let i = 0;
+
+    const goal = (name: string) => {
+      try { (window as any).ym?.(112642218, 'reachGoal', name); } catch {}
+    };
+    const picked = (n: number) => form.querySelector<HTMLInputElement>(`input[name="q${n}"]:checked`);
+    const answered = (idx: number) => !!picked(idx + 1);
+    const focusQuestion = (el: HTMLElement) => el.querySelector<HTMLElement>('.quiz-q')?.focus({ preventScroll: true });
+
+    function buildResult() {
+      const key = [1, 2, 3].map((n) => picked(n)?.value ?? '').join('');
+      const [result, invite] = QUIZ_RESULTS[key] ?? ['', ''];
+      text.textContent = result;
+      cta.textContent = invite;
+    }
+
+    function show(n: number, focus: boolean) {
+      i = n;
+      const isFinal = n === total;
+      if (isFinal) buildResult();
+      steps.forEach((s, k) => { s.hidden = k !== n; });
+      final.hidden = !isFinal;
+      count.textContent = isFinal ? 'Итог' : `${n + 1} / ${total}`;
+      bar.style.width = (Math.min(n + 1, total) / total) * 100 + '%';
+      back.hidden = n === 0;
+      back.textContent = isFinal ? 'Закрыть' : '← Назад';
+      next.hidden = n >= total - 1;
+      finish.hidden = n !== total - 1;
+      book.hidden = !isFinal;
+      if (!isFinal) next.disabled = finish.disabled = !answered(n);
+      if (focus) focusQuestion(isFinal ? final : steps[n]);
+      dlg!.scrollTop = 0;
+    }
+
+    const close = () => dlg.close();
+
+    form.addEventListener('change', () => {
+      if (i < total) next.disabled = finish.disabled = !answered(i);
+    });
+    form.addEventListener('submit', (e) => e.preventDefault());
+    next.addEventListener('click', () => {
+      if (!answered(i)) return;
+      show(i + 1, true);
+      goal('quiz_step_' + i);
+    });
+    finish.addEventListener('click', () => {
+      if (!answered(i)) return;
+      show(total, true);
+      goal('quiz_complete');
+    });
+    back.addEventListener('click', () => {
+      if (i === total) close();
+      else if (i > 0) show(i - 1, true);
+    });
+    book.addEventListener('click', () => goal('quiz_book_click'));
+
+    $<HTMLButtonElement>('[data-quiz-close]').addEventListener('click', close);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', () => { form.reset(); show(0, false); });
+
+    // Просмотр карты во весь экран
+    const zbox = document.querySelector('[data-quiz-zoombox]') as HTMLDialogElement;
+    const zimg = zbox.querySelector('[data-quiz-zoomimg]') as HTMLImageElement;
+    const zcap = zbox.querySelector('[data-quiz-zoomcap]') as HTMLElement;
+    dlg.querySelectorAll<HTMLButtonElement>('[data-quiz-zoom]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const img = btn.querySelector('img')!;
+        zimg.src = img.currentSrc || img.src;
+        zimg.alt = img.alt;
+        // не растягиваем маленькие изображения сильнее чем в 2 раза
+        zimg.style.maxHeight = Math.min(window.innerHeight * 0.8, img.naturalHeight * 2) + 'px';
+        zcap.textContent = btn.parentElement?.querySelector('.quiz-pick-cap')?.textContent ?? '';
+        zbox.showModal();
+        goal('quiz_card_zoom');
+      });
+    });
+    zbox.addEventListener('click', () => zbox.close());
+
+    openers.forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(0, false);
+        dlg.showModal();
+        focusQuestion(steps[0]);
+        goal('quiz_open');
+      }),
+    );
+  }
+</script>
+
+<style is:global>
+/* ===== Квиз-модалка «Практика с МАК» ===== */
+html:has(.quiz[open]){overflow:hidden}
+.quiz{border:none;padding:0;margin:auto;background:var(--bg);color:var(--ink);border-radius:16px;width:min(560px,100%);max-width:calc(100% - 32px);max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 24px 70px oklch(0% 0 0 / .28);overscroll-behavior:contain}
+.quiz::backdrop{background:oklch(18% .01 60 / .55);backdrop-filter:blur(3px)}
+.quiz[open]{animation:quiz-in .28s ease-out}
+@keyframes quiz-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.quiz-head{display:flex;align-items:center;gap:12px;padding:18px 20px 12px}
+.quiz-kicker{letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);font-size:12px;margin:0;flex:1}
+.quiz-count{font-family:IBM Plex Mono,monospace;font-size:13px;color:var(--muted)}
+.quiz-close{background:0 0;border:1px solid var(--line2);border-radius:50%;width:36px;height:36px;font-size:20px;line-height:1;cursor:pointer;color:var(--ink2);display:inline-flex;align-items:center;justify-content:center;transition:border-color .15s}
+.quiz-close:hover{border-color:var(--accent);color:var(--accent)}
+.quiz-progress{height:2px;background:var(--line);margin:0 20px}
+.quiz-progress span{display:block;height:100%;width:33.33%;background:var(--accent);transition:width .3s ease}
+.quiz-body{padding:20px 20px 4px}
+.quiz-step[hidden],.quiz-final[hidden],.quiz-variant[hidden]{display:none}
+.quiz-step,.quiz-final{animation:quiz-step .3s ease-out}
+@keyframes quiz-step{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+.quiz-intro{margin:0 0 16px;display:flex;flex-direction:column;gap:8px}.quiz-intro p{margin:0;color:var(--ink2);font-size:15px;line-height:1.6}.quiz-sub{margin:-8px 0 14px;color:var(--muted);font-size:14.5px;line-height:1.5;font-style:italic}.quiz-hint{color:var(--muted);font-size:14.5px;line-height:1.5;margin:0 0 14px}
+.quiz-card{margin:0 auto 20px;width:min(100%,360px);aspect-ratio:4/3;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px oklch(30% .02 60 / .18);border:6px solid var(--surface)}
+.quiz-card--photo{width:min(100%,300px);aspect-ratio:auto;border:none;border-radius:16px;background:var(--surface)}.quiz-card--photo img{height:auto}
+.quiz-card svg,.quiz-card img{width:100%;height:100%;display:block;object-fit:cover}
+.quiz fieldset{border:none;margin:0;padding:0;min-width:0}
+.quiz-q{font-family:Lora,Georgia,serif;font-size:clamp(19px,2.6vw,22px);font-weight:500;line-height:1.3;margin:0 0 16px;padding:0;outline:none}
+.quiz-opts{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border:1px solid var(--line2);border-radius:10px;cursor:pointer;font-size:15.5px;line-height:1.45;color:var(--ink2);transition:border-color .15s,background .15s}
+.quiz-opt:hover{border-color:var(--accent-soft)}
+.quiz-opt input{appearance:none;flex:none;width:18px;height:18px;margin-top:3px;border:1.5px solid var(--faint);border-radius:50%;display:grid;place-content:center;cursor:pointer;transition:border-color .15s}
+.quiz-opt input:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s}
+.quiz-opt input:checked{border-color:var(--accent)}
+.quiz-opt input:checked:before{transform:scale(1)}
+.quiz-opt input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.quiz-opt-ico{flex:none;font-size:18px;line-height:1.3}.quiz-opt-text{display:flex;flex-direction:column;gap:3px}.quiz-opt-text b{font-weight:400;color:var(--ink)}.quiz-opt-text small{font-size:14.5px;color:var(--muted);line-height:1.45}.quiz-opt:has(input:checked){border-color:var(--accent);background:var(--surface);color:var(--ink)}
+/* Шаг 3: три карты. Ширина колонок пропорциональна формату карт, поэтому высота у всех одинаковая */
+.quiz-picks{display:grid;grid-template-columns:.894fr .642fr 1.481fr;gap:12px;align-items:start;margin-bottom:22px}
+.quiz-pick{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}.quiz-pick-cap{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-soft)}.quiz-opt-tag{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:2px}
+.quiz-pick-img{position:relative;display:block;width:100%;padding:0;border:none;background:none;cursor:zoom-in;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px oklch(30% .02 60 / .16);transition:transform .2s,box-shadow .2s}
+.quiz-pick-img:hover{transform:translateY(-2px);box-shadow:0 10px 24px oklch(30% .02 60 / .22)}
+.quiz-pick-img:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.quiz-pick-zoom{position:absolute;right:6px;bottom:6px;width:28px;height:28px;border-radius:50%;background:oklch(20% .01 60 / .55);backdrop-filter:blur(2px)}
+.quiz-pick-zoom:before,.quiz-pick-zoom:after{content:"";position:absolute;background:#fff}
+.quiz-pick-zoom:before{left:8px;top:8px;width:9px;height:9px;border:2px solid #fff;border-radius:50%;background:none}
+.quiz-pick-zoom:after{left:18px;top:18px;width:6px;height:2px;transform:rotate(45deg);transform-origin:left}
+.quiz-hint--center{text-align:center;margin-bottom:12px}
+.quiz-zoom{border:none;padding:0;margin:0;width:100%;max-width:100%;height:100%;max-height:100%;background:transparent;display:none;align-items:center;justify-content:center;cursor:zoom-out}
+.quiz-zoom[open]{display:flex;animation:quiz-in .22s ease-out}
+.quiz-zoom::backdrop{background:oklch(12% .01 60 / .9)}
+.quiz-zoom figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px}
+.quiz-zoom img{display:block;max-width:calc(100vw - 32px);width:auto;height:auto;border-radius:14px;box-shadow:0 20px 60px oklch(0% 0 0 / .5)}
+.quiz-zoom figcaption{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:oklch(90% .02 60)}
+.quiz-zoom-close{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:1px solid oklch(100% 0 0 / .35);background:oklch(0% 0 0 / .3);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.quiz-zoom-close:hover{border-color:#fff}
+.quiz-pick-img img{width:100%;height:auto;display:block}
+@media (width<=520px){.quiz-picks{grid-template-columns:.894fr .642fr;row-gap:12px}.quiz-pick--3{grid-column:1/-1}.quiz-pick--3 .quiz-pick-img{width:min(100%,340px)}}
+/* Итог */
+.quiz-result{padding:18px;border-radius:10px;background:var(--surface);border-left:2px solid var(--accent)}
+.quiz-result p{margin:0;color:var(--ink2);font-size:15.5px;line-height:1.6}
+.quiz-result p+p,.quiz-result ul+p{margin-top:12px}
+.quiz-result ul{list-style:none;margin:10px 0 0;display:flex;flex-direction:column;gap:4px;color:var(--muted);font-size:14.5px;line-height:1.5}
+.quiz-result li:before{content:"✦  ";color:var(--accent)}.quiz-result-text{font-size:16px!important;line-height:1.7!important;color:var(--ink)!important}.quiz-result-cta{margin-top:14px!important;padding-top:14px;border-top:1px solid var(--line);font-weight:400;color:var(--ink2)!important}
+/* Низ окна */
+.quiz-foot{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 18px}
+.quiz-back{background:0 0;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:10px 4px}
+.quiz-back:hover{color:var(--accent-h)}
+.quiz-back[hidden]{display:inline-block;visibility:hidden}
+.quiz-actions{display:flex;gap:10px;margin-left:auto}
+.quiz-next,.quiz-book{background:var(--accent);color:var(--on-accent);border:none;border-radius:999px;min-height:44px;padding:12px 26px;font-size:15.5px;font-weight:400;cursor:pointer;display:inline-flex;align-items:center;text-decoration:none;transition:background .15s,opacity .15s}
+.quiz-next:hover,.quiz-book:hover{background:var(--accent-h);color:var(--on-accent)}
+.quiz-next:disabled{opacity:.4;cursor:not-allowed;background:var(--accent)}
+.quiz-next[hidden],.quiz-book[hidden]{display:none}
+@media (width<=520px){.quiz{max-width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:14px}.quiz-card{width:100%}.quiz-card--photo{width:min(78%,280px)}.quiz-foot{padding:12px 16px 16px;flex-wrap:nowrap}.quiz-body{padding:16px 16px 4px}.quiz-head{padding:14px 16px 10px}.quiz-progress{margin:0 16px}}
+@media (prefers-reduced-motion:reduce){.quiz[open],.quiz-step,.quiz-final{animation:none}.quiz-progress span{transition:none}}
+</style>
